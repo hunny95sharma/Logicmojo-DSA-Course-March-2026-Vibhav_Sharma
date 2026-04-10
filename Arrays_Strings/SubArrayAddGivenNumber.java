@@ -28,8 +28,6 @@ public class SubArrayAddGivenNumber {
 			
 	}
 	
-	//need to do through sliding window
-
 	public static void main(String[] args) {
 		System.out.println(Arrays.toString(fetchSubArrayAddGivenNumber(new int[] {1, 4, 20, 3, 10, 5},33)));
 	}
