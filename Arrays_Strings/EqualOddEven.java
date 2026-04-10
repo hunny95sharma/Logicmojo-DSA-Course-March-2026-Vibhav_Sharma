@@ -32,9 +32,7 @@ public class EqualOddEven {
 	    }
 		
 		return new int[] {maxlength,start,end};
-	}
-	//sliding window se bhi karein
-	
+	}	
 	public static void main(String[] args) {
 		System.out.println(Arrays.toString(fetchEqualOddEven(new int[] {1,2,1,2})));
 
