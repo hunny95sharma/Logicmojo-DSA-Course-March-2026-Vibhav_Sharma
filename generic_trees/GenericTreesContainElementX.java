@@ -1,0 +1,77 @@
+package generic_trees;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class GenericTreesContainElementX {
+	
+	public static boolean checkIfContainsX(TreeNode<Integer> root, int x){
+
+		if(root==null)
+			return false;
+		if(root.data.equals(x))
+			return true;
+		int childCount=root.children.size();
+		for(int i=0;i<childCount;i++) {
+			TreeNode<Integer>frontNode=root.children.get(i);
+			if(checkIfContainsX(frontNode,x))
+				return true;
+		}
+return false;
+	}
+
+	public static TreeNode<Integer> takeInputLevelWise(){
+		Scanner sc =new Scanner(System.in);
+		System.out.println("Enter root data");
+		int rootData=sc.nextInt();
+		Queue<TreeNode<Integer>>queue=new ArrayDeque<>();
+		TreeNode<Integer>root=new TreeNode<>(rootData);
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			TreeNode<Integer>frontNode=queue.poll();
+			System.out.println("enter the number of children for "+frontNode.data);
+			int children=sc.nextInt();
+			for(int i=0;i<children;i++) {
+				System.out.println("Enter "+(i+1)+"th child data for "+frontNode.data);
+				int childData=sc.nextInt();
+				TreeNode<Integer>child=new TreeNode<>(childData); 
+				queue.add(child);
+				frontNode.children.add(child);
+			}
+		}
+		sc.close();
+		return root;
+		
+	}
+	
+	public static void printLevelWise(TreeNode<Integer>root) {
+		if(root==null)
+			return;
+		Queue<TreeNode<Integer>>queue=new ArrayDeque<>();
+		int level=0;
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			int nodesCountAtLevel=queue.size();
+			for(int i=0;i<nodesCountAtLevel;i++) {
+				TreeNode<Integer> frontNode=queue.poll();
+				System.out.print(frontNode.data+"--->");
+				int childCount=frontNode.children.size();
+				for(int j=0;j<childCount;j++) {
+					TreeNode<Integer>childNode=frontNode.children.get(j);
+					queue.add(childNode);
+					System.out.print(childNode.data+", ");
+				}
+				System.out.println();
+			}
+			level++;
+		}
+	}
+
+	public static void main(String[] args) {
+		TreeNode<Integer>root=takeInputLevelWise();
+		printLevelWise(root);
+		System.out.println(checkIfContainsX(root, 4));
+	}
+
+}
